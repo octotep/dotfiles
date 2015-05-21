@@ -1,0 +1,130 @@
+### Note snippets
+### 
+### Here are snippets for note taking
+snippet note "Note snippet" b
+\documentclass{scrartcl}
+
+% Put all packages here:
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{csvsimple}
+\usepackage{filecontents}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% Title information goes here
+\title{$1}
+\subtitle{${2:A}${2/(A)$|(C)$|(Pa)$|(Ps)$|(I)$|(.*)/(?1:nalysis of Algorithms)(?2:ryptology)(?3:rallel and Distributed Computing)(?4:ychology)(?5:ntro to Music Lit)/}}
+\date{\small `date +%Y--%m--%d`}
+\author{\small Chris Yealy}
+
+\begin{document}
+
+\maketitle
+
+$0
+
+\end{document}
+endsnippet
+
+
+global !p
+import os.path
+import urlparse
+def name(url):
+	return os.path.basename(urlparse.urlparse(url).path)
+endglobal
+
+snippet linkpic "Insert a picture from a url" b
+% Download a picture
+\IfFileExists{${2:`!p snip.rv = name(t[1])`}}{}{\immediate\write18{curl -o $2 ${1:http://}}}
+\begin{center}
+\includegraphics[width=0.${3:5}\textwidth]{$2}
+\end{center}
+$0
+endsnippet
+
+
+snippet figpic "Insert a figure from a url" b
+% Download a picture
+\IfFileExists{${2:`!p snip.rv = name(t[1])`}}{}{\immediate\write18{curl -o $2 ${1:http://}}}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.${3:5}\textwidth]{$2}
+	\caption{${2/(\w+)\.\w+/\u$1/}$4}
+	\label{fig:${2/(\w+)\.\w+/$1/}}
+\end{figure}
+$0
+endsnippet
+
+
+snippet csvtable "Insert a csv table" b
+
+endsnippet
+
+
+snippet src "Source code listing" b
+\begin{minted}[linenos, mathescape, frame=lines, label=${2:code}]{${1:c}}
+$0
+\end{minted}
+endsnippet
+
+
+### Small things
+###
+### Here are some small things to make life easier
+snippet i "italics" 
+\textit{${1:${VISUAL}}} $0
+endsnippet
+
+
+snippet bf "boldface" 
+\textbf{${1:${VISUAL}}} $0
+endsnippet
+
+
+snippet tt "teletype" 
+\texttt{${1:${VISUAL}}} $0
+endsnippet
+
+
+### Resume things
+###
+### Here are snippets for moderncv
+snippet resume "Template for a resume" b
+\documentclass[11pt,letter]{moderncv} 
+\moderncvtheme[blue]{${1:classic|casual}}
+
+\usepackage[utf8]{inputenc}
+\usepackage[scale=0.8]{geometry}
+\usepackage[none]{hyphenat}
+
+% Create title information
+\firstname{${2:First name}}
+\familyname{${3:Last name}}
+\address{${4:Street}}{${5:City, State, Zip}}
+\mobile{${6:Cell Phone}}
+% \phone{${7:Home Phone}}
+\email{${8:Email address}}
+
+\nopagenumbers{}
+
+\begin{document}
+\maketitle
+
+$0
+
+\end{document}
+endsnippet
+
+
+snippet cventry "Full entry for resume entry" b
+\cventry{${1:Date}}{${2:Degree}}{${3:Place}}{${4:City}}{\textit{${5:Grade}}}{${6:Description}}$0
+endsnippet
+
+
+snippet cvline "Line for resume entry" b
+\cvline{${1:Date}}{${2:Description}}$0
+endsnippet

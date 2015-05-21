@@ -73,6 +73,7 @@ abbreviations=(
   "Iv"    "| ${VISUAL:-${EDITOR}}"
   "Iw"    "| wc"
   "Ix"    "| xargs"
+  "uvil"    "udevil mount /dev/sd"
 )
 
 magic-abbrev-expand() {
@@ -95,6 +96,7 @@ bindkey "^x " no-magic-abbrev-expand
 zstyle ':completion:*' menu select
 setopt completealiases
 # Cache completions, the pacman completion funtion is costly
+zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
@@ -114,6 +116,7 @@ stty start undef
 
 # Load dircolors
 eval $( dircolors -b $HOME/.dir_colors )
+. /etc/profile.d/fzf.zsh
 
 # set up antigen, plugin manager for zsh
 source /usr/share/zsh/scripts/antigen/antigen.zsh
@@ -138,4 +141,8 @@ alias grep='grep --color=auto'
 alias gom='cd /media'
 alias tmux='tmux -2'
 alias open='xdg-open'
+alias t='task'
 alias vimp="vim -i NONE --cmd 'set noundofile' --cmd 'set noswapfile' --cmd 'set nobackup'"
+alias gohome='cd $GOPATH/src/github.com/octotep'
+alias godemo='cd ~/demo'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
