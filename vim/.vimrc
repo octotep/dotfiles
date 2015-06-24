@@ -4,17 +4,17 @@
 " =================
 
 " Create directories {{{
-if !isdirectory("$HOME/.vim/backup")
-	call mkdir("$HOME/.vim/backup", "p")
+if !isdirectory($HOME . "/.vim/backup")
+	call mkdir($HOME . "/.vim/backup", "p")
 endif
-if !isdirectory("$HOME/.vim/sessions")
-	call mkdir("$HOME/.vim/sessions", "p")
+if !isdirectory($HOME . "/.vim/sessions")
+	call mkdir($HOME . "/.vim/sessions", "p")
 endif
-if !isdirectory("$HOME/.vim/swap")
-	call mkdir("$HOME/.vim/swap", "p")
+if !isdirectory($HOME . "/.vim/swap")
+	call mkdir($HOME . "/.vim/swap", "p")
 endif
-if !isdirectory("$HOME/.vim/undo")
-	call mkdir("$HOME/.vim/undo", "p")
+if !isdirectory($HOME . "/.vim/undo")
+	call mkdir($HOME . "/.vim/undo", "p")
 endif
 "}}}
 
@@ -56,7 +56,7 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-sleuth'
 Plug 'takac/vim-hardtime'
 Plug 'EinfachToll/DidYouMean'
-Plug 'maxbrunsfeld/vim-yankstack'
+" Plug 'maxbrunsfeld/vim-yankstack'
 " Plug 'vasconcelloslf/vim-interestingwords'
 "}}}
 
