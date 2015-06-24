@@ -37,10 +37,9 @@ My custom Ultisnips snippets are also included with this installation
 
 ### tmux
 
-Right off the bat, we already have a curveball. The prefix is `C-s`. I find
-this much better than `C-a`, which I use too much in vim to give up. In order
-to use this config, you must have `stty -ixon` set in the shell. That frees up
-the `C-s` and `C-q` keys to do useful things instead of tty flow control.
+Right off the bat, we already have a curveball. The prefix is `C-space`. I find
+this much better than `C-a`, which I use too much in vim to give up.
+I also use the mappings for vim-tmux-navigator in this config. If you need <C-l>, you can still use it as <C-space><C-l>.
 
 This config also takes advantage of the tmux plugin manager. Code for
 initializing it is included in the main install script.
