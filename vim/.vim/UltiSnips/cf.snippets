@@ -1,0 +1,25 @@
+snippet dump "Dump a variable" b
+<cfdump var = #${1:theVar}#>
+<cfabort/>
+endsnippet
+
+snippet break "Breakpoint" b
+<cfoutput><h1>BREAK in ${1:`!p snip.rv = snip.fn`}</h1></cfoutput>
+<cfdump var = #request#/>
+<cfabort/>
+endsnippet
+
+snippet request "Dump the request var" 
+<cfdump var = #request#/>
+<cfabort/>
+endsnippet
+
+snippet client "Dump the client var" 
+<cfdump var = #client#/>
+<cfabort/>
+endsnippet
+
+snippet view "Dump the view var" 
+<cfdump var = #view#/>
+<cfabort/>
+endsnippet
