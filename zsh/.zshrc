@@ -116,7 +116,6 @@ stty start undef
 
 # Load dircolors
 eval $( dircolors -b $HOME/.dir_colors )
-. /etc/profile.d/fzf.zsh
 
 # set up antigen, plugin manager for zsh
 source /usr/share/zsh/scripts/antigen/antigen.zsh
