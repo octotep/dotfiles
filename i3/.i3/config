@@ -21,6 +21,19 @@ font pango:DejaVu Sans Mono 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+# Set window colors
+# class                 border  backgr. text    indicator
+client.focused          #5f87af #5f87af #ffffff #87af87
+client.focused_inactive #444444 #444444 #bcbcbc #444444
+client.unfocused        #1c1c1c #1c1c1c #bcbcbc #1c1c1c
+client.urgent           #af5f5f #af5f5f #ffffff #af5f5f
+client.placeholder      #000000 #ffffaf #ffffaf #000000
+
+client.background       #1c1c1c
+
+# No titlebars, but border on new window
+new_window 1pixel
+
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
 set $up k
@@ -61,15 +74,21 @@ bindsym Ctrl+XF86Sleep exec --no-startup-id light-locker-command -l && systemctl
 bindsym Ctrl+XF86Suspend exec --no-startup-id light-locker-command -l && systemctl hibernate
 
 # Lock the screen
-bindsym Mod4+p exec --no-startup-id i3lock -i $HOME/pics/lockbpk/background.png 
+bindsym Mod4+p exec --no-startup-id i3lock -i $HOME/pics/lockbpk/background.png
 bindsym Mod4+Shift+p exec --no-startup-id light-locker-command -l
 
 # Change the display method
 bindsym XF86Display exec --no-startup-id disper -C
 
+# Bind audio keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/bin/volchange inc
+bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/bin/volchange dec
+bindsym XF86AudioMute exec --no-startup-id $HOME/bin/volchange toggle
+bindsym XF86AudioPause exec --no-startup-id mpc toggle
+
 # Open up the calculator
 bindsym XF86Calculator exec --no-startup-id terminator -c "system-calc" -e "mux start calc"
-for_window [instance="system-calc" class="Terminator"] floating toggle 
+for_window [instance="system-calc" class="Terminator"] floating toggle
 
 # change focus
 bindsym Mod4+$left focus left
@@ -134,11 +153,15 @@ bindsym Mod4+m exec --no-startup-id /home/octotep/bin/i3runorraise scratch-maste
 exec --no-startup-id terminator -c scratch-notes
 exec --no-startup-id terminator -c scratch-master
 
-for_window [instance="scratch-notes" class="Terminator"] move to scratchpad 
-for_window [instance="scratch-master" class="Terminator"] move to scratchpad 
+for_window [instance="scratch-notes" class="Terminator"] move to scratchpad
+for_window [instance="scratch-master" class="Terminator"] move to scratchpad
+
+# Force windows to float
+for_window [class="Qjackctl" instance="qjackctl"] floating enable
+for_window [instance="xmessage"] floating enable
 
 # Get things from scratch pad
-bindsym Mod4+c [instance="slackchat"] scratchpad show
+bindsym Mod4+c [instance="slack"] scratchpad show
 
 # switch to workspace
 bindsym Mod4+1 workspace 1
@@ -202,11 +225,11 @@ mode "resize" {
         bindsym Up          resize shrink height 10 px or 10 ppt
         bindsym Right       resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape 
-		bindsym Return mode "default" 
-		bindsym Escape mode "default" 
-		bindsym Mod4+r mode "default" 
-} 
+        # back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym Mod4+r mode "default"
+}
 bindsym Mod4+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -219,29 +242,36 @@ bar {
 	font pango:DejaVu Sans Mono 9, FontAwesome 10
 
 	colors {
-		background #5b605e
-		statusline #dcdccc
+		background #262626
+		statusline #bcbcbc
 
-		focused_workspace  #ffffff #285577
-		active_workspace   #ffffff #333333
-		inactive_workspace #888888 #222222
-		urgent_workspace   #ffffff #900000
+		focused_workspace  #ffffff #5f87af
+		active_workspace   #bcbcbc #444444
+		inactive_workspace #bcbcbc #444444
+		urgent_workspace   #bcbcbc #af5f5f
 	}
 }
 
+for_window [class="Twiccian"] floating enable
+for_window [class="Slack"] floating enable
+for_window [instance="slack" class="Slack"] move to scratchpad
+
 # Start applications which we need for the system tray
 exec --no-startup-id nm-applet
-exec --no-startup-id kmix
+# exec --no-startup-id kmix
 exec --no-startup-id cbatticon
 exec --no-startup-id xfce4-clipman
 
 # Start programs to run in the background
 exec --no-startup-id sh ~/.fehbg
-#exec --no-startup-id unclutter
-exec --no-startup-id light-locker --no-lock-on-suspend --lock-after-screensaver=0
-exec --no-startup-id ~/bin/startslack
+exec --no-startup-id unclutter
+# exec --no-startup-id light-locker --no-lock-on-suspend --lock-after-screensaver=0
+# exec --no-startup-id cadence-session-start --system-start
+exec --no-startup-id slack
 exec --no-startup-id compton --config ~/.compton.conf
+exec --no-startup-id volnoti
 
 # make caps lock act as escape when tapped, control when used as a combo
+exec --no-startup-id xmodmap ~/.Xmodmap
 exec --no-startup-id xcape -e 'Caps_Lock=Escape'
-
+exec --no-startup-id xcape -t 300 -e 'Shift_L=parenleft;Shift_R=parenright'
