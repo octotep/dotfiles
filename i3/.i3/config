@@ -109,10 +109,10 @@ bindsym Mod4+Shift+$up move up
 bindsym Mod4+Shift+$right move right
 
 # move workspace to a different output
-bindsym Mod4+Shift+Left move workspace to output left
-bindsym Mod4+Shift+Down move workspace to output down
-bindsym Mod4+Shift+Up move workspace to output up
-bindsym Mod4+Shift+Right move workspace to output right
+bindsym Mod4+Ctrl+Left move workspace to output left
+bindsym Mod4+Ctrl+Down move workspace to output down
+bindsym Mod4+Ctrl+Up move workspace to output up
+bindsym Mod4+Ctrl+Right move workspace to output right
 
 # split in horizontal orientation
 bindsym Mod4+g split h
@@ -159,6 +159,7 @@ for_window [instance="scratch-master" class="Terminator"] move to scratchpad
 # Force windows to float
 for_window [class="Qjackctl" instance="qjackctl"] floating enable
 for_window [instance="xmessage"] floating enable
+for_window [title="Steam - News"] floating enable
 
 # Get things from scratch pad
 bindsym Mod4+c [instance="slack"] scratchpad show
@@ -226,33 +227,33 @@ mode "resize" {
         bindsym Right       resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-	bindsym Mod4+r mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym Mod4+r mode "default"
 }
 bindsym Mod4+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	tray_output primary
-	# status_command i3status
-	status_command i3blocks
-	# font xft:Inconsolata
-	font pango:DejaVu Sans Mono 9, FontAwesome 10
+        tray_output primary
+        # status_command i3status
+        status_command i3blocks
+        # font xft:Inconsolata
+        font pango:DejaVu Sans Mono 9, FontAwesome 10
 
-	colors {
-		background #262626
-		statusline #bcbcbc
+        colors {
+                background #262626
+                statusline #bcbcbc
 
-		focused_workspace  #ffffff #5f87af
-		active_workspace   #bcbcbc #444444
-		inactive_workspace #bcbcbc #444444
-		urgent_workspace   #bcbcbc #af5f5f
-	}
+                focused_workspace  #ffffff #5f87af
+                active_workspace   #bcbcbc #444444
+                inactive_workspace #bcbcbc #444444
+                urgent_workspace   #bcbcbc #af5f5f
+        }
 }
 
-for_window [class="Twiccian"] floating enable
+# Start the slack client in the scratchpad and make it floating
 for_window [class="Slack"] floating enable
 for_window [instance="slack" class="Slack"] move to scratchpad
 
@@ -265,8 +266,6 @@ exec --no-startup-id xfce4-clipman
 # Start programs to run in the background
 exec --no-startup-id sh ~/.fehbg
 exec --no-startup-id unclutter
-# exec --no-startup-id light-locker --no-lock-on-suspend --lock-after-screensaver=0
-# exec --no-startup-id cadence-session-start --system-start
 exec --no-startup-id slack
 exec --no-startup-id compton --config ~/.compton.conf
 exec --no-startup-id volnoti
@@ -274,4 +273,4 @@ exec --no-startup-id volnoti
 # make caps lock act as escape when tapped, control when used as a combo
 exec --no-startup-id xmodmap ~/.Xmodmap
 exec --no-startup-id xcape -e 'Caps_Lock=Escape'
-exec --no-startup-id xcape -t 300 -e 'Shift_L=parenleft;Shift_R=parenright'
+exec --no-startup-id xcape -t 250 -e 'Shift_L=parenleft;Shift_R=parenright'
